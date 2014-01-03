@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionTypes\Agents.cs" />
+    <Compile Include="ActionTypes\BackupOptions.cs" />
     <Compile Include="ActionTypes\BuildArtifacts.cs" />
     <Compile Include="ActionTypes\BuildConfigs.cs" />
     <Compile Include="ActionTypes\Builds.cs" />
@@ -84,6 +85,8 @@
     <Compile Include="Locators\UserLocator.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Connection\ITeamCityCaller.cs" />
+
     <Compile Include="TeamCityClient.cs" />
     <Compile Include="ActionTypes\Users.cs" />
     <Compile Include="ActionTypes\VcsRoots.cs" />

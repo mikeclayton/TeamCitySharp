@@ -90,6 +90,15 @@ namespace TeamCitySharp.ActionTypes
             _caller.PutFormat(settingValue, HttpContentTypes.TextPlain, "/app/rest/buildTypes/{0}/settings/{1}", locator, settingName);
         }
 
+        public bool GetConfigurationPauseStatus(BuildTypeLocator locator)
+        {
+             return _caller.Get<bool>(string.Format("/app/rest/buildTypes/{0}/paused/", locator.Name));
+        }
+        public void SetConfigurationPauseStatus(BuildTypeLocator locator, bool isPaused)
+        {
+            _caller.PutFormat(isPaused, HttpContentTypes.TextPlain, "/app/rest/buildTypes/{0}/paused/", locator);
+        }
+
         public void PostRawArtifactDependency(BuildTypeLocator locator, string rawXml)
         {
             _caller.PostFormat<ArtifactDependency>(rawXml, HttpContentTypes.ApplicationXml, string.Empty, "/app/rest/buildTypes/{0}/artifact-dependencies", locator);
@@ -142,6 +151,11 @@ namespace TeamCitySharp.ActionTypes
             }
 
             _caller.PutFormat(sw.ToString(), HttpContentTypes.ApplicationXml, "/app/rest/buildTypes/{0}/parameters", locator);
+        }
+
+        public void DownloadConfiguration(BuildTypeLocator locator, Action<string> downloadHandler)
+        {
+            _caller.GetDownloadFormat(downloadHandler, "/app/rest/buildTypes/{0}", locator);
         }
 
         public void PostRawAgentRequirement(BuildTypeLocator locator, string rawXml)

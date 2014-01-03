@@ -5,6 +5,9 @@
 For more information on TeamCity visit:
 http://www.jetbrains.com/teamcity
 
+##Releases
+Please find the release notes [here](https://github.com/stack72/TeamCitySharp/releases)
+
 ##License 
 http://stack72.mit-license.org/
 
@@ -30,6 +33,18 @@ To get a list of running builds
     var client = new TeamCityClient("localhost:81");
     client.Connect("admin", "qwerty");
     var builds = client.Builds.ByBuildLocator(BuildLocator.RunningBuilds());
+
+##Connecting to a server
+
+To connect as an authenticated user:
+
+    var client = new TeamCityClient("localhost:81");
+    client.Connect("username", "password");
+
+To connect as a Guest:
+
+    var client = new TeamCityClient("localhost:81");
+    client.ConnectAsGuest();
     
 ##API Interaction Groups
 There are many tasks that the TeamCity API can do for us. TeamCitySharp groups these tasks into specialist areas
@@ -102,13 +117,19 @@ Each area has its own list of methods available
 	void PostRawSnapshotDependency(BuildTypeLocator locator, XmlElement rawXml);
 	BuildConfig BuildType(BuildTypeLocator locator);
 
+    void DeleteConfiguration(BuildTypeLocator locator);
+    void DeleteAllBuildTypeParameters(BuildTypeLocator locator);
+    void PutAllBuildTypeParameters(BuildTypeLocator locator, IDictionary<string, string> parameters);
+    void DownloadConfiguration(BuildTypeLocator locator, Action<string> downloadHandler);
+
 ###ServerInformation
     Server ServerInfo();
     List<Plugin> AllPlugins();
-    bool TriggerServerInstanceBackup(string fileName);
+    string TriggerServerInstanceBackup(BackupOptions backupOptions);
 
 ###Users
     List<User> All();
+    User Details(string userName);
     List<Role> AllRolesByUserName(string userName);
     List<Group> AllGroupsByUserName(string userName);
     List<Group> AllUserGroups();
@@ -138,10 +159,14 @@ Each area has its own list of methods available
 
 ##Credits
 
-* Copyright (c) 2013 Paul Stack (@stack72)
-* Thanks to the following contributors:
+Copyright (c) 2013 Paul Stack (@stack72)
+
+Thanks to the following contributors:
+
 * Barry Mooring (@codingbadger)
 * Simon Bartlett (@sibartlett)
 * Mike Larah (@MikeLarah)
 * Alexander Fast (@mizipzor)
 * Serge Baltic
+* Philipp Dolder
+* Mark deVilliers
