@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Xml;
 using TeamCitySharp.DomainEntities;
@@ -19,6 +20,8 @@ namespace TeamCitySharp.ActionTypes
         BuildConfig CreateConfiguration(string projectName, string configurationName);
 
         void SetConfigurationSetting(BuildTypeLocator locator, string settingName, string settingValue);
+        bool GetConfigurationPauseStatus(BuildTypeLocator locator);
+        void SetConfigurationPauseStatus(BuildTypeLocator locator, bool isPaused);
         void PostRawArtifactDependency(BuildTypeLocator locator, string rawXml);
         void PostRawBuildStep(BuildTypeLocator locator, string rawXml);
         void PostRawBuildTrigger(BuildTypeLocator locator, string rawXml);
@@ -84,5 +87,6 @@ namespace TeamCitySharp.ActionTypes
         /// <since>8.0</since>
         void PutAllBuildTypeParameters(BuildTypeLocator locator, IDictionary<string, string> parameters);
 
+        void DownloadConfiguration(BuildTypeLocator locator, Action<string> downloadHandler);
     }
 }

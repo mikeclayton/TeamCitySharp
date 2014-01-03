@@ -9,13 +9,14 @@ namespace TeamCitySharp.Locators
         FAILURE,
         ERROR
     }
+
     public class BuildLocator
     {
         public static BuildLocator WithId(long id)
         {
             return new BuildLocator {Id = id};
         }
-        
+
         public static BuildLocator WithNumber(string number)
         {
             return new BuildLocator {Number = number};
@@ -27,20 +28,20 @@ namespace TeamCitySharp.Locators
         }
 
         public static BuildLocator WithDimensions(BuildTypeLocator buildType = null,
-                                                    UserLocator user = null,
-                                                    string agentName = null,
-                                                    BuildStatus? status = null,
-                                                    bool? personal = null,
-                                                    bool? canceled = null,
-                                                    bool? running = null,
-                                                    bool? pinned = null,
-                                                    int? maxResults = null,
-                                                    int? startIndex = null,
-                                                    BuildLocator sinceBuild = null,
-                                                    DateTime? sinceDate = null,
-                                                    string[] tags = null,
-                                                    string branch = null
-                                                )
+                                                  UserLocator user = null,
+                                                  string agentName = null,
+                                                  BuildStatus? status = null,
+                                                  bool? personal = null,
+                                                  bool? canceled = null,
+                                                  bool? running = null,
+                                                  bool? pinned = null,
+                                                  int? maxResults = null,
+                                                  int? startIndex = null,
+                                                  BuildLocator sinceBuild = null,
+                                                  DateTime? sinceDate = null,
+                                                  string[] tags = null,
+                                                  string branch = null
+            )
         {
             return new BuildLocator
                        {
@@ -78,7 +79,7 @@ namespace TeamCitySharp.Locators
         public DateTime? SinceDate { get; private set; }
         public string Branch { get; private set; }
 
-        public override string  ToString()
+        public override string ToString()
         {
             if (Id != null)
             {
@@ -112,42 +113,42 @@ namespace TeamCitySharp.Locators
                 locatorFields.Add("sinceBuild:(" + SinceBuild + ")");
             }
 
-            if(!string.IsNullOrEmpty(AgentName))
+            if (!string.IsNullOrEmpty(AgentName))
             {
                 locatorFields.Add("agentName:" + AgentName);
             }
 
-            if(Status.HasValue)
+            if (Status.HasValue)
             {
                 locatorFields.Add("status:" + Status.Value.ToString());
             }
 
-            if(Personal.HasValue)
+            if (Personal.HasValue)
             {
                 locatorFields.Add("personal:" + Personal.Value.ToString());
             }
 
-            if(Canceled.HasValue)
+            if (Canceled.HasValue)
             {
                 locatorFields.Add("canceled:" + Canceled.Value.ToString());
             }
 
-            if(Running.HasValue)
+            if (Running.HasValue)
             {
                 locatorFields.Add("running:" + Running.Value.ToString());
             }
 
-            if(Pinned.HasValue)
+            if (Pinned.HasValue)
             {
                 locatorFields.Add("pinned:" + Pinned.Value.ToString());
             }
 
-            if(MaxResults.HasValue)
+            if (MaxResults.HasValue)
             {
                 locatorFields.Add("count:" + MaxResults.Value.ToString());
             }
 
-            if(StartIndex.HasValue)
+            if (StartIndex.HasValue)
             {
                 locatorFields.Add("start:" + StartIndex.Value.ToString());
             }
